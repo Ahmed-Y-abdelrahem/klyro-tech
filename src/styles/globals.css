@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════
+   1) DESIGN TOKENS — Tailwind v4 CSS-first config
+   ══════════════════════════════════════════════ */
+@theme inline {
+  /* Colors → مربوطة بمتغيرات الـ runtime عشان Dark/Light */
+  --color-space: var(--kt-space);
+  --color-surface: var(--kt-surface);
+  --color-elevated: var(--kt-elevated);
+  --color-line: var(--kt-line);
+  --color-line-strong: var(--kt-line-strong);
+  --color-accent: var(--kt-accent);
+  --color-lavender: var(--kt-lavender);
+  --color-violet: var(--kt-violet);
+  --color-text: var(--kt-text);
+  --color-muted: var(--kt-muted);
+  --color-subtle: var(--kt-subtle);
+
+  /* Fonts */
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-arabic: var(--font-tajawal), var(--font-inter), sans-serif;
+
+  /* Container (max-w-container) */
+  --container-container: 80rem;
+
+  /* Shadows */
+  --shadow-glow: var(--kt-shadow-glow);
+  --shadow-elevated: var(--kt-shadow-elevated);
+
+  /* Animations */
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-rtl: marquee-rtl 40s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-rtl {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}
+
+/* ══════════════════════════════════════════════
+   2) RUNTIME VARIABLES — DARK (الافتراضي)
+   ══════════════════════════════════════════════ */
+:root,
+[data-theme="dark"] {
+  --kt-space: #05060F;
+  --kt-surface: #0B0D1C;
+  --kt-elevated: #12142E;
+  --kt-line: rgb(139 139 240 / 0.12);
+  --kt-line-strong: rgb(139 139 240 / 0.22);
+  --kt-accent: #8B8BF0;
+  --kt-lavender: #C4B5FD;
+  --kt-violet: #6A5AE0;
+  --kt-text: #FFFFFF;
+  --kt-muted: #9DA0C0;
+  --kt-subtle: rgb(255 255 255 / 0.5);
+
+  --kt-radial: radial-gradient(ellipse 80% 60% at 50% 0%, rgb(106 90 224 / 0.15) 0%, transparent 60%);
+  --kt-grid: linear-gradient(to right, rgb(139 139 240 / 0.06) 1px, transparent 1px),
+             linear-gradient(to bottom, rgb(139 139 240 / 0.06) 1px, transparent 1px);
+
+  --kt-shadow-glow: 0 0 60px -15px rgb(139 139 240 / 0.35);
+  --kt-shadow-elevated: 0 10px 40px -10px rgb(0 0 0 / 0.5);
+
+  --brand-gradient: linear-gradient(115deg, #6A5AE0 0%, #8B8BF0 50%, #C4B5FD 100%);
+
+  color-scheme: dark;
+}
+
+/* ══════════════════════════════════════════════
+   3) RUNTIME VARIABLES — LIGHT
+   ══════════════════════════════════════════════ */
+[data-theme="light"] {
+  --kt-space: #F7F7FB;
+  --kt-surface: #FFFFFF;
+  --kt-elevated: #F0F1F8;
+  --kt-line: rgb(106 90 224 / 0.12);
+  --kt-line-strong: rgb(106 90 224 / 0.22);
+  --kt-accent: #6A5AE0;
+  --kt-lavender: #8B8BF0;
+  --kt-violet: #5546C9;
+  --kt-text: #0B0D1C;
+  --kt-muted: #555A7E;
+  --kt-subtle: rgb(11 13 28 / 0.5);
+
+  --kt-radial: radial-gradient(ellipse 80% 60% at 50% 0%, rgb(106 90 224 / 0.08) 0%, transparent 60%);
+  --kt-grid: linear-gradient(to right, rgb(106 90 224 / 0.05) 1px, transparent 1px),
+             linear-gradient(to bottom, rgb(106 90 224 / 0.05) 1px, transparent 1px);
+
+  --kt-shadow-glow: 0 0 60px -15px rgb(106 90 224 / 0.2);
+  --kt-shadow-elevated: 0 10px 40px -10px rgb(106 90 224 / 0.15);
+
+  color-scheme: light;
+}
+
+/* ══════════════════════════════════════════════
+   4) BASE
+   ══════════════════════════════════════════════ */
+html {
+  background-color: var(--kt-space);
+}
+
+body {
+  background-color: var(--kt-space);
+  color: var(--kt-text);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[dir="rtl"] body {
+  font-family: var(--font-tajawal), var(--font-inter), sans-serif;
+}
+
+::selection {
+  background: var(--kt-accent);
+  color: var(--kt-space);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--kt-space); }
+::-webkit-scrollbar-thumb {
+  background: var(--kt-elevated);
+  border-radius: 999px;
+  border: 2px solid var(--kt-space);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--kt-accent); }
+
+:focus-visible {
+  outline: 2px solid var(--kt-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ══════════════════════════════════════════════
+   5) CUSTOM UTILITY CLASSES
+   ══════════════════════════════════════════════ */
+.text-gradient {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-brand-gradient {
+  background: var(--brand-gradient);
+}
+
+.bg-radial-violet {
+  background: var(--kt-radial);
+}
+
+.bg-grid-overlay {
+  background-image: var(--kt-grid);
+  background-size: 48px 48px;
+}
+
+.noise-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http://www.w3.org/2000/svg%27%20width%3D%27120%27%20height%3D%27120%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23n)%27/%3E%3C/svg%3E");
+}
+
+.clip-diagonal-down {
+  clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 96%);
+}
+
+.glass {
+  background: color-mix(in srgb, var(--kt-surface) 70%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--kt-line);
+}
+
+.glass-elevated {
+  background: color-mix(in srgb, var(--kt-elevated) 80%, transparent);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--kt-line);
+  box-shadow: var(--kt-shadow-elevated);
+}
+
+/* ══════════════════════════════════════════════
+   6) REDUCED MOTION
+   ══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
