@@ -1,5 +1,6 @@
 "use client";
 
+import { Download } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Logo from "@/components/ui/Logo";
 import { footerNav } from "@/data/navigation";
@@ -18,12 +19,22 @@ export default function Footer() {
     <footer className="relative border-t border-line bg-surface">
       <Container className="py-16 md:py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-          {/* ═══ Brand ═══ */}
+          {/* ═══ Brand + Profile Download ═══ */}
           <div className="md:col-span-4">
             <Logo />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
               {t({ en: company.shortDescription, ar: company.shortDescriptionAr })}
             </p>
+
+            <a
+              href="/docs/company-profile.pdf"
+              download="Klyro-Tech-Company-Profile.pdf"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 font-mono text-xs text-muted transition-all duration-300 hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+            >
+              <Download className="h-3.5 w-3.5" />
+              {t({ en: "Company Profile (PDF)", ar: "الملف التعريفي (PDF)" })}
+            </a>
+
             <p className="mt-6 font-mono text-xs uppercase tracking-wide text-muted">
               {t({ en: company.slogan, ar: company.sloganAr })}
             </p>
@@ -78,7 +89,7 @@ export default function Footer() {
                   href={`mailto:${company.email}`}
                   className="transition-colors hover:text-text"
                 >
-                  {company.email}
+                  <span dir="ltr">{company.email}</span>
                 </a>
               </li>
               {company.phones.map((phone) => (
