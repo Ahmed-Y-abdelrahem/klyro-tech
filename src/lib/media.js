@@ -12,7 +12,7 @@ export const media = {
     industries: u("photo-1486406146926-c627a92ad1ab"),
     process: u("photo-1517430816045-df4b7de11d1d"),
     careers: u("photo-1552664730-d307ca884978"),
-    contact: u("photo-1519389950473-47ba027781c5"),
+    contact: u("photo-1521737604893-d14cc237f11d"),
   },
 
     services: {

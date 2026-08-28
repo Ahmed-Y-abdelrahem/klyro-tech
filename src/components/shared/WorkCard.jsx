@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { cn } from "@/lib/utils";
+import { services } from "@/data/services";
 
+const serviceAr = Object.fromEntries(services.map((s) => [s.title, s.titleAr]));
 export default function WorkCard({ item, index = 0 }) {
   const { t, direction } = useLocale();
 
@@ -53,7 +55,7 @@ export default function WorkCard({ item, index = 0 }) {
 
         <div className="flex flex-1 flex-col p-7">
           <span className="font-mono text-xs uppercase tracking-wide text-accent">
-            {t({ en: item.category, ar: item.categoryAr })} · {item.service}
+            {t({ en: item.category, ar: item.categoryAr })} · {t({ en: item.service, ar: serviceAr[item.service] })}
           </span>
           <h3 className="mt-3 font-display text-xl font-semibold text-text">
             {item.title}

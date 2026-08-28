@@ -2,15 +2,24 @@
 
 import { ExternalLink } from "lucide-react";
 import Container from "@/components/ui/Container";
+import { services } from "@/data/services";
 import { useLocale } from "@/contexts/LocaleContext";
+
+const serviceAr = Object.fromEntries(services.map((s) => [s.title, s.titleAr]));
 
 export default function CaseResults({ item }) {
   const { t } = useLocale();
 
   const facts = [
     { label: { en: "Year", ar: "السنة" }, value: item.year },
-    { label: { en: "Industry", ar: "القطاع" }, value: t({ en: item.category, ar: item.categoryAr }) },
-    { label: { en: "Service", ar: "الخدمة" }, value: item.service },
+    {
+      label: { en: "Industry", ar: "القطاع" },
+      value: t({ en: item.category, ar: item.categoryAr }),
+    },
+    {
+      label: { en: "Service", ar: "الخدمة" },
+      value: t({ en: item.service, ar: serviceAr[item.service] }),
+    },
   ];
 
   return (

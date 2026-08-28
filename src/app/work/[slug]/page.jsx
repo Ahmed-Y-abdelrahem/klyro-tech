@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { work, getWorkBySlug } from "@/data/work";
-import { media } from "@/lib/media";
 import PageHero from "@/components/shared/PageHero";
 import CTA from "@/components/shared/CTA";
 import CaseStudy from "@/features/work/CaseStudy";
@@ -30,10 +29,13 @@ export default async function WorkDetailPage({ params }) {
   return (
     <>
       <PageHero
-        image={media.workImages[item.slug]}
-        eyebrow={`${item.category} · ${item.year}`}
+        image={item.image}
+        eyebrow={{
+          en: `${item.category} · ${item.year}`,
+          ar: `${item.categoryAr} · ${item.year}`,
+        }}
         title={item.title}
-        description={item.summary}
+        description={{ en: item.summary, ar: item.summaryAr }}
       />
       <CaseResults item={item} />
       <CaseStudy item={item} />

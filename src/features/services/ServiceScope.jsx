@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { PackageCheck } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeader from "@/components/shared/SectionHeader";
+import { deliverablesAr } from "@/data/deliverablesAr";
 import { useLocale } from "@/contexts/LocaleContext";
 
 export default function ServiceScope({ service }) {
@@ -30,7 +31,9 @@ export default function ServiceScope({ service }) {
               className="group bg-surface p-6 transition-colors duration-300 hover:bg-elevated"
             >
               <PackageCheck className="h-5 w-5 text-accent transition-transform duration-300 group-hover:scale-110" />
-              <p className="mt-4 font-mono text-sm text-text">{item}</p>
+              <p className="mt-4 text-sm font-medium leading-relaxed text-text">
+                {t({ en: item, ar: deliverablesAr[service.slug]?.[i] })}
+              </p>
             </motion.div>
           ))}
         </div>

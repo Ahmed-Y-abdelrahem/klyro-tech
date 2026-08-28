@@ -6,8 +6,11 @@ import { ArrowUpRight } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeader from "@/components/shared/SectionHeader";
 import { work } from "@/data/work";
+import { services } from "@/data/services";
 import { useLocale } from "@/contexts/LocaleContext";
 import { cn } from "@/lib/utils";
+
+const serviceAr = Object.fromEntries(services.map((s) => [s.title, s.titleAr]));
 
 export default function IndustryDetails({ industry }) {
   const { t, direction } = useLocale();
@@ -22,7 +25,6 @@ export default function IndustryDetails({ industry }) {
 
   return (
     <>
-      {/* ═══ Focus Areas (صفوف مرقمة مضغوطة) ═══ */}
       <section className="py-24 md:py-32">
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
@@ -50,7 +52,7 @@ export default function IndustryDetails({ industry }) {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <p className="font-display text-lg font-semibold text-text transition-colors group-hover:text-accent">
-                      {item}
+                      {t({ en: item, ar: industry.focusAr?.[i] })}
                     </p>
                   </motion.div>
                 ))}
@@ -60,7 +62,6 @@ export default function IndustryDetails({ industry }) {
         </Container>
       </section>
 
-      {/* ═══ Related Work (كروت أفقية صغيرة) ═══ */}
       {relatedWork.length > 0 ? (
         <section className="border-t border-line py-24 md:py-32">
           <Container>
@@ -85,16 +86,14 @@ export default function IndustryDetails({ industry }) {
                     className="group grid grid-cols-1 gap-4 border-b border-line py-7 transition-colors duration-300 hover:bg-white/[0.02] md:grid-cols-12 md:items-center md:px-6"
                   >
                     <span className="font-mono text-xs uppercase tracking-wide text-accent md:col-span-3">
-                      {item.service}
+                      {t({ en: item.service, ar: serviceAr[item.service] })}
                     </span>
                     <div className="md:col-span-5">
                       <h3 className="font-display text-xl font-semibold text-text transition-colors group-hover:text-accent">
                         {item.title}
                       </h3>
                     </div>
-                    <p className="text-sm text-muted md:col-span-3">
-                      {item.year}
-                    </p>
+                    <p className="text-sm text-muted md:col-span-3">{item.year}</p>
                     <div className="flex md:col-span-1 md:justify-end">
                       <ArrowUpRight
                         className={cn(

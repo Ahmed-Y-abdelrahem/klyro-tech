@@ -56,8 +56,10 @@ export default function CTA({
             </Button>
           </div>
           <p className="mt-8 font-mono text-xs text-muted">
-            {site.email} · {site.phones[0].number} ({site.phones[0].country})
-          </p>
+  <span dir="ltr">{site.email}</span> ·{" "}
+  <span dir="ltr">{site.phones[0].number}</span>{" "}
+  ({t({ en: site.phones[0].country, ar: site.phones[0].country === "Egypt" ? "مصر" : "السعودية" })})
+</p>
         </motion.div>
       </Container>
     </section>

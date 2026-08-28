@@ -8,9 +8,18 @@ export default function CaseStudy({ item }) {
   const { t } = useLocale();
 
   const blocks = [
-    { label: { en: "The Challenge", ar: "التحدي" }, text: item.challenge },
-    { label: { en: "Our Approach", ar: "منهجنا" }, text: item.approach },
-    { label: { en: "The Outcome", ar: "النتيجة" }, text: item.outcome },
+    {
+      label: { en: "The Challenge", ar: "التحدي" },
+      text: { en: item.challenge, ar: item.challengeAr },
+    },
+    {
+      label: { en: "Our Approach", ar: "منهجنا" },
+      text: { en: item.approach, ar: item.approachAr },
+    },
+    {
+      label: { en: "The Outcome", ar: "النتيجة" },
+      text: { en: item.outcome, ar: item.outcomeAr },
+    },
   ];
 
   return (
@@ -29,7 +38,9 @@ export default function CaseStudy({ item }) {
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
                 {t(block.label)}
               </span>
-              <p className="mt-4 text-sm leading-relaxed text-muted">{block.text}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                {t(block.text)}
+              </p>
             </motion.div>
           ))}
         </div>

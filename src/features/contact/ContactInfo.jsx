@@ -4,11 +4,17 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { site } from "@/data/site";
 import { useLocale } from "@/contexts/LocaleContext";
 
+const countryAr = {
+  Egypt: "مصر",
+  "Saudi Arabia": "السعودية",
+};
+
 export default function ContactInfo() {
   const { t } = useLocale();
 
   return (
     <div className="flex flex-col gap-10">
+      {/* ═══ البريد ═══ */}
       <div className="border-t border-line pt-6">
         <div className="flex items-center gap-3">
           <Mail className="h-4 w-4 text-accent" />
@@ -17,12 +23,16 @@ export default function ContactInfo() {
           </span>
         </div>
         <p className="mt-3">
-          <a href={`mailto:${site.email}`} className="font-display text-xl text-text transition-colors hover:text-accent">
-            {site.email}
+          <a
+            href={`mailto:${site.email}`}
+            className="font-display text-xl text-text transition-colors hover:text-accent"
+          >
+            <span dir="ltr">{site.email}</span>
           </a>
         </p>
       </div>
 
+      {/* ═══ الهاتف ═══ */}
       <div className="border-t border-line pt-6">
         <div className="flex items-center gap-3">
           <Phone className="h-4 w-4 text-accent" />
@@ -32,16 +42,22 @@ export default function ContactInfo() {
         </div>
         <div className="mt-3 space-y-2">
           {site.phones.map((phone) => (
-            <p key={phone.country}>
-              <a href={`tel:${phone.number.replace(/\s/g, "")}`} className="font-display text-lg text-text transition-colors hover:text-accent">
-                {phone.number}
+            <p key={phone.country} className="flex flex-wrap items-center gap-2">
+              <a
+                href={`tel:${phone.number.replace(/\s/g, "")}`}
+                className="font-display text-lg text-text transition-colors hover:text-accent"
+              >
+                <span dir="ltr">{phone.number}</span>
               </a>
-              <span className="ms-2 text-sm text-muted">— {phone.country}</span>
+              <span className="text-sm text-muted">
+                — {t({ en: phone.country, ar: countryAr[phone.country] })}
+              </span>
             </p>
           ))}
         </div>
       </div>
 
+      {/* ═══ الأسواق ═══ */}
       <div className="border-t border-line pt-6">
         <div className="flex items-center gap-3">
           <MapPin className="h-4 w-4 text-accent" />
